@@ -1,4 +1,5 @@
 dist
 node_modules
+logger.log
 npm-debug.log
 .idea

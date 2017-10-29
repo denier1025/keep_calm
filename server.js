@@ -1,14 +1,16 @@
 const path = require('path');
 const fs = require('fs');
+// const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
 const products = require('./products');
-app.use('/products', products);
 
-const logger = 'logger.txt';
-app.use('/', (req,resp, next) => {
-    const data = `Address: ${req.ip}; Time: ${new Date().toLocaleString()}; URL: ${req.url}\n`;
+const dist = path.join(__dirname, 'dist');
+const logger = 'logger.log';
+
+app.use((req,resp, next) => {
+    const data = `Address: ${req.ip}; Time: ${new Date().toLocaleString()}; Method: ${req.method}; URL: ${req.url}\n`;
     fs.appendFile(logger, data, (err) => {
         if(err) {
             console.log(err);
@@ -18,12 +20,18 @@ app.use('/', (req,resp, next) => {
     next();
 });
 
-app.use('/', (req, resp, next) => {
+app.use((req, resp, next) => {
     console.log('Middleware functions were done!');
     next();
 });
 
-app.get('/', express.static(path.join(__dirname, 'dist')));
+app.use('/products', products);
+app.use(express.static(dist));
+// app.use(bodyParser.urlencoded({extended: true}));
+app.all('/', (req, resp) => {
+    console.log('Welcome to main Page!');
+    resp.sendFile('index.html');
+});
 
 app.listen(8080, () => {
     console.log('Server started on port 8080!');
