@@ -1,10 +1,10 @@
 {
   "name": "keep_calm",
   "version": "1.0.0",
-  "description": "Web app with NodeJS, Express",
+  "description": "Web app with NodeJS, Express and MongoDB",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "": ""
   },
   "repository": {
     "type": "git",
@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/denier1025/keep_calm#readme",
   "dependencies": {
-    "express": "^4.16.2"
+    "express": "^4.16.2",
+    "mongodb": "^2.2.33"
   }
 }

@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 // const bodyParser = require('body-parser');
+// const cookieParser = require('cookie-parser');
 const express = require('express');
 const app = express();
 
@@ -28,6 +29,7 @@ app.use((req, resp, next) => {
 app.use('/products', products);
 app.use(express.static(dist));
 // app.use(bodyParser.urlencoded({extended: true}));
+// app.use(cookieParser());
 app.all('/', (req, resp) => {
     console.log('Welcome to main Page!');
     resp.sendFile('index.html');
